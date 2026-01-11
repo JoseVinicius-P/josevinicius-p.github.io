@@ -1,11 +1,11 @@
 {
-    "name": "Nossas Intenções",
-    "short_name": "Nossas Intenções",
+    "name": "nossas_intencoes_flutter",
+    "short_name": "nossas_intencoes_flutter",
     "start_url": ".",
     "display": "standalone",
-    "background_color": "#FFFFFF",
-    "theme_color": "#FFFFFF",
-    "description": "Ofereça suas intenções",
+    "background_color": "#hexcode",
+    "theme_color": "#hexcode",
+    "description": "A new Flutter project.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [
