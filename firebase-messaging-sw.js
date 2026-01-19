@@ -19,14 +19,16 @@ const messaging = firebase.messaging();
 messaging.onBackgroundMessage((message) => {
   console.log("onBackgroundMessage", message);
 
-  const title = message.notification?.title || 'Nossas Intenções';
-  const options = {
-    body: message.notification?.body,
-    icon: '/icons/Icon-192.png',
-    data: {
-      click_action: message.data?.click_action || '/'
-    }
-  };
+  const title = message.data?.title || 'Nossas Intenções';
+
+    const options = {
+      body: message.data?.body || '',
+      icon: '/icons/Icon-192.png',
+      badge: '/icons/Icon-192.png',
+      data: {
+        click_action: message.data?.click_action || '/'
+      }
+    };
 
   self.registration.showNotification(title, options);
 });
