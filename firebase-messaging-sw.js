@@ -15,7 +15,42 @@ firebase.initializeApp({
 
 const messaging = firebase.messaging();
 
-// Optional:
+// Recebe mensagens em background
 messaging.onBackgroundMessage((message) => {
   console.log("onBackgroundMessage", message);
+
+  const title = message.notification?.title || 'Nossas Intenções';
+  const options = {
+    body: message.notification?.body,
+    icon: '/icons/Icon-192.png',
+    data: {
+      click_action: message.data?.click_action || '/'
+    }
+  };
+
+  self.registration.showNotification(title, options);
+});
+
+// 🔴 ESSENCIAL: clique na notificação
+self.addEventListener('notificationclick', function (event) {
+  event.notification.close();
+
+  const targetUrl =
+    event.notification.data?.click_action || '/';
+
+  event.waitUntil(
+    clients.matchAll({
+      type: 'window',
+      includeUncontrolled: true
+    }).then((clientList) => {
+      for (const client of clientList) {
+        if (client.url.includes(targetUrl) && 'focus' in client) {
+          return client.focus();
+        }
+      }
+      if (clients.openWindow) {
+        return clients.openWindow(targetUrl);
+      }
+    })
+  );
 });
