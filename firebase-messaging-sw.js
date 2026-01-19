@@ -24,7 +24,7 @@ messaging.onBackgroundMessage((message) => {
     const options = {
       body: message.data?.body || '',
       icon: '/icons/Icon-192.png',
-      badge: '/icons/Icon-192.png',
+      badge: '/icons/badge.png',
       data: {
         click_action: message.data?.click_action || '/'
       }
